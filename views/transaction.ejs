@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CheckOut Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+    <center><h1 style="color: red;font-weight: bold;">Transaction List</h1></center>
+    <a href="/viewProduct">
+      <button id="viewProduct" class="btn btn-warning" style="float:right;margin-right: 10px;">Admin View</button>
+  </a><br><br>
+    <table class="table table-striped" id="addElement">
+        <tr>
+            <th>Transaction Id</th>
+            <th>Product Name</th>
+            <th>Product Price</th>
+            <th>Product Qty</th>
+            <th>Total Price</th>
+            <th>Buyer Name</th>
+            <th>Buyer Email </th>
+          <th>Buying Time</th>
+            <th>Buying Date</th>  
+        </tr>
+        <% for(var i=0; i < data.length; i++){ %>
+            <tr>
+                  <td><%= data[i]._id %></td>
+                  <td><%= data[i].name %></td>
+                  <td><%= data[i].price %></td>
+                  <td><%= data[i].qty %></td>
+                  <td><%= data[i].tprice %></td>
+                  <td><%= data[i].username %></td>
+                  <td><%= data[i].email %></td>
+                  <td><%= data[i].time %></td>
+                  <td><%= data[i].date %></td>
+            </tr>
+            <% } %>
+
+            <!-- <% data.forEach(transaction => { %>
+                <tr>
+                  <td><%= data.name %></td>
+                  <td><%= data.price %></td>
+                  <td><%= data.qty %></td>
+                  <td><%= data.tprice %></td>
+                  <td><%= data.username %></td>
+                  <td><%= data.email %></td>
+                  <td><%= data.time %></td>
+                  <td><%= data.date %></td>
+                </tr>
+                <% }) %> -->
+
+    </table>
+</body>
+<script src="http://127.0.0.1:8000/transaction.js" type="text/javascript"></script>
+</html>

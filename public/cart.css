@@ -1,0 +1,26 @@
+#viewHeadings{
+    border: 1px solid white;
+    height: 50px;
+    width: 70%;
+    /* background-color: lightgrey; */
+}
+
+/* #headspan{
+    color: blue;
+} */
+
+/* #viewProductDetails{
+    border: 1px solid gainsboro;
+    height: 300px;
+    width: 70%;
+     background-color: lightcoral; 
+    margin-left: 202px;
+} */
+
+#viewFinalAmount{
+    text-align: center;
+}
+
+#payBill{
+    text-align: center;
+}

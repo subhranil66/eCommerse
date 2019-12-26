@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>View Product</title>
+    <!-- <link rel="stylesheet" type="text/css" href="view.css"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="jquery-3.4.1.min.js"></script>
+</head>
+<body>
+        <center>
+        <h1 style="color: red;">Added Products</h1>
+        </center>
+        <a href="/logIn">
+            <button id="logIn" class="btn btn-danger" style="float:right;margin-right: 10px;">Log Out</button>
+        </a>
+        <a href="/addProducts">
+            <button id="addProduct" class="btn btn-success" style="float:right;margin-right: 10px;">Add Product</button>
+        </a>
+        <a href="/eTransaction">
+            <button id="eTransaction" class="btn btn-warning" style="float:right;margin-right: 10px;">Transaction</button>
+        </a>
+        <a href="/">
+            <button id="userView" class="btn btn-info" style="float:right;margin-right: 10px;">Home</button>
+        </a>
+        <div id="productPanel" style="margin-left: 200px;margin-right: 200px;">
+        <% for(var i=0; i < data.length; i++){ %>
+            <div>
+        <p>Name: <%= data[i].productName %></p>
+        <p>Desc: <%= data[i].productDesc %></p>
+        <p>Price: <%= data[i].productPrice %></p>
+        <p>Qty: <%= data[i].productQty %></p>
+        <a href="/editProduct/<%= data[i]._id %>">
+            <button class="btn btn-primary editProduct" style="margin-left: 0px;">Edit</button>
+        </a>
+        <button id="<%= data[i]._id %>" class="btn btn-danger deleteProduct" style="margin-left: 10px;">Delete</button>
+        <hr>
+            </div>
+        <% } %>
+    </div>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="http://127.0.0.1:8000/view.js" type="text/javascript"></script>
+</body>
+</html>

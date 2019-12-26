@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Cart</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8000/cart.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- <script src="jquery-3.4.1.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+<div>
+<!-- <div class="msg p-2 w-100 rounded-lg text-white">
+
+</div> -->
+    <center><div id="viewHeadings">
+        <!-- <h3 id="headspan"> Product Id &emsp;&emsp; Product Name &emsp;&emsp; Product Qty &emsp;&emsp; Product Price &emsp;&emsp; Total Amount &emsp;&emsp; Remove</h3> -->
+        <h1 style="color: red;font-weight: bold;">My Cart</h1>
+    <% if(arrcart.length == 0) { %>
+            <center>
+                    <div class="shadow-lg p-3 mb-5 bg-white rounded" id="box" style="margin-top: 100px;height: 400px;width: 400px;">
+                    <p style="color: blue;font-size: 30px;margin-top: 100px;"><b>Cart is Empty</b></p>
+                    <p style="color: green;font-size: 30px;"><b>Add Product to Cart</b></p>                     
+                    </div>
+            </center>
+     <% } %>
+     <% if(arrcart.length > 0) { %>
+        <table class="table table-hover table-dark" id="addElement"> 
+           <tr> 
+                    <th>Product Name</th> 
+                    <th>Product Qty</th> 
+                    <th>Product Price</th> 
+                    <th>Total Amount</th> 
+                    <th>Buy Item</th>
+                    <th>Remove</th> 
+              </tr>
+            
+              <% for(var i=0; i < arrcart.length; i++){ %>
+              <tr>
+                    <td><%= arrcart[i].name %></td>
+                    <td><%= arrcart[i].qty %></td>
+                    <td><%= arrcart[i].price %></td>
+                    <td><%= arrcart[i].tprice %></td>
+                    <td><button onclick="buyProduct('<%= arrcart[i]._id %>','<%= data1._id %>', '<%= arrcart[i].qty %>', '<%= arrcart[i].oldqty %>', event)" class="btn btn-primary buy" id="<%= arrcart[i]._id %>">Buy</button></td>
+                    <td><i id="<%= arrcart[i]._id %>" class="fa fa-trash deletecartproduct" aria-hidden="true"></i></td>
+              </tr>
+              <% } %>
+             
+               </table>
+         <% } %>
+    </div>
+    <a href="/loggedUser/<%= data1._id %>">
+        <button id="loggedUser" class="btn btn-warning" style="float:right;margin-right: 10px;">User View</button>
+    </a>
+</center>
+    <!-- <a href="/loggedUser/">
+<button id="productView" class="btn btn-success" style="float:right;margin-right: 10px;">Products Page</button>
+</a> -->
+</div>
+    <!-- <div id="viewProductDetails"></div> -->
+    <!-- <div id="viewFinalAmount"></div><br>
+    <div id="payBill"></div>
+    <p id="hour"></p>
+    <p id="minute"></p>
+    <p id="second"></p>
+    <p id="date"></p>
+    <p id="month"></p>
+    <p id="year"></p> -->
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</body>
+<script type="text/javascript" src="http://127.0.0.1:8000/cart.js"></script>
+</html>

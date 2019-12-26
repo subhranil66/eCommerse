@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Logged User View</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+        <center>
+            <h1 style="color: red;">Available Products</h1>
+            </center>
+            <p style="float:right;margin-right: 10px;">Welcome <font style="color: red;font-weight: bold;"><%= data1.email %></font></p><br><br>
+            <a href="/logIn">
+                <button id="logOut" class="btn btn-danger" style="float:right;margin-right: 10px;">Log Out</button>
+            </a>
+            <a href="/eCart/<%= data1._id %>">
+            <button id="viewCart" class="btn btn-primary" style="float:right;margin-right: 10px;">View Cart</button>
+            </a>
+            <div id="productPanel" style="margin-left: 200px;margin-right: 200px;">
+            <% for(var i=0; i < data.length; i++){ %>
+            <div>
+                <p>Name: <%= data[i].productName %></p>
+                <p>Desc: <%= data[i].productDesc %></p>
+                <p>Price: <%= data[i].productPrice %></p>
+                <p>Qty: <%= data[i].productQty %></p>
+                <p><b>Enter Qty: </b>
+                    <input type="number" class="form-group col-md-3" id="requiredQty<%= data[i]._id %>" name="requiredQty" placeholder="Enter required qty"></p>
+                <button onclick="addCart('<%= data[i]._id %>','<%= data1._id %>', '<%= data[i].productQty %>', event)" class="btn btn-info userView">Add To Cart</button>
+                <hr>
+            </div>
+        <% } %>
+    </div>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="http://127.0.0.1:8000/loggeduser.js"></script>       
+</body>
+</html>
