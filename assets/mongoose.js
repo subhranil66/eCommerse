@@ -11,12 +11,10 @@ var eSchema = new Schema({
     productName: {
         type: String,
         required: true,
-    //    max: 100
     },
     productDesc: {
         type: String,
         required: true,
-    //    max: 100
     },
     productPrice: {
         type: Number,
@@ -65,7 +63,6 @@ var cartSchema = new Schema({
     qty:{
         type: Number,
         required: true,
-    //    max: 100
     },
     name:{
         type: String,
@@ -75,12 +72,10 @@ var cartSchema = new Schema({
     price:{
         type: Number,
         required: true,
-    //    max: 100
     },
     tprice:{
         type: Number,
         required: true,
-    //    max: 100
     },
     oldid:{
         type: Schema.Types.ObjectId,
@@ -96,49 +91,36 @@ var cartSchema = new Schema({
 var Cartitem = mongoose.model('Cartitem', cartSchema);
 
 var tranSchema = new Schema({
-    // tid:{
-    //     type: Number,
-    //     // required: true,
-    //     required: '{PATH} is required!',
-    // },
     name:{
         type: String,
-        // required: true,
         required: '{PATH} is required!',
     },
     price:{
         type: Number,
-        // required: true,
         required: '{PATH} is required!',
     },
     qty:{
         type: Number,
-        // required: true,
         required: '{PATH} is required!',
     },
     tprice:{
         type: Number,
-        // required: true,
         required: '{PATH} is required!',
     },
     username:{
         type: String,
-        // required: true,
         required: '{PATH} is required!',
     },
     email:{
         type: String,
-        // required: true,
         required: '{PATH} is required!',
     },
     time:{
         type: String,
-        // required: true,
         required: '{PATH} is required!',
     },
     date:{
         type: String,
-        // required: true,
         required: '{PATH} is required!',
     },
 });
@@ -173,20 +155,11 @@ app.get('/viewProduct', function(req, res){
 
 app.post("/deleteProduct/:id", async (req, res) => {
     const product = await Ecart.findByIdAndDelete({_id: req.params.id});
-    // console.log(product);
     res.send(product);
 });
 
-// app.get("/editProduct/:id", (req, res) => {
-//     Ecart.findById({_id: req.params.id}, (err, data)=>{
-//         console.log(data);
-//         res.render('edit', {data});
-        
-//     });
-// });
 
 app.get('/editProduct/:id',(req, res)=>{
-    //console.log(req.params.id)
     Ecart.findById(req.params.id)
     .then((data)=>{
         res.render('edit', {data})
@@ -198,7 +171,6 @@ app.get('/editProduct/:id',(req, res)=>{
 
 app.post("/updateProduct/:id", async (req, res) => {
     const product = await Ecart.findByIdAndUpdate(req.params.id, req.body, {new: true});
-    // if(err) throw err;
     res.redirect('/viewProduct')
 });
 
@@ -236,12 +208,8 @@ app.post('/signedUp', (req, res)=>{
 // login form
 
 app.post('/loggedIn', (req, res)=>{
-    // var logIn = (req.body).save((err, data)=>{
-    //     if(err) throw err;
     Signedup.find({}, (err, data)=>{
         if(err) throw err;
-        // res.render('login', {data});
-        // console.log(data.length)
         for(var i=0;i < data.length;i++){
         console.log(data[i].email)
         if(data[i].email == req.body.email){
@@ -251,9 +219,6 @@ app.post('/loggedIn', (req, res)=>{
             else{
             res.redirect('/loggedUser/' + data[i]._id);
             }
-            // req.session.email = data[i].email;
-            // req.session.username = data[i].username;
-            // console.log("ajsgsa = "+req.session.email);
             flag=1;
             break;
         }
@@ -267,25 +232,6 @@ app.post('/loggedIn', (req, res)=>{
     });
     });
 
-/*
-    app.post('/loggedIn', (req, res)=>{
-        // var logIn = (req.body).save((err, data)=>{
-        //     if(err) throw err;
-        Signedup.findOne({email: req.body.email}, (err, data)=>{
-            if(err) throw err;
-            // res.render('login', {data});
-            // console.log(data.email)
-                // req.session.email = data.email;
-                req.session.email = data.email
-                req.session.username = data.username;
-                res.redirect('/loggedUser/' + data._id);
-                // console.log("ajsgsa = "+req.session.email);
-                // flag=1;
-            //    break;
-        
-        });
-        });
-*/
 
 // signedUp User
 app.get('/loggedUser/:id', function(req, res){
@@ -300,18 +246,12 @@ app.get('/loggedUser/:id', function(req, res){
 
 // cart adding
 app.post('/cart/:id/:id1', async(req, res)=>{
-    // var cart = Cartitem.findById(req.params.id).save((err, data)=>{
-    //     if(err) throw err;
-    //     res.redirect('/eCart');
-    // });
 
     Signedup.findById(req.params.id)
     .then(async(data1)=>{
-        // console.log(data1._id);
 
     Ecart.findById(req.params.id1)
     .then(async(product)=>{
-        // console.log(product._id)
        const newCart = new Cartitem({
             umail: data1.email,
             qty: req.body.qty,
@@ -328,16 +268,6 @@ app.post('/cart/:id/:id1', async(req, res)=>{
        .catch((error)=>{
         console.log(error)
        })
-
-
-    //    const oldid = product._id
-    // const quantity = req.body.qty
-    // const mainproduct = await Ecart.findByIdAndUpdate({ _id: oldid }, {
-    //     $inc: {
-    //         productQty: -quantity
-    //     }
-    // }, { new: true })
-
 
     })
     .catch((error)=>{
@@ -372,24 +302,9 @@ app.get('/eCart/:id', function(req, res){
 app.delete("/deletecartproduct/:id", async (req, res) => {
     const product = await Cartitem.findByIdAndDelete({_id: req.params.id});
 
-    // const oldid = product.oldid
-    // const quantity = product.qty
-    // const mainproduct = await Ecart.findByIdAndUpdate({ _id: oldid }, {
-    //     $inc: {
-    //         productQty: +quantity
-    //     }
-    // }, { new: true })
-
     console.log(product);
     res.send(product);
 });
-
-// remove from cart after transaction
-// app.post("/buy/:id", async (req, res) => {
-//     const product = await Cartitem.findByIdAndDelete({_id: req.params.id});
-//     console.log(product);
-//     res.send(product);
-// });
 
 // add to transaction
 
@@ -402,7 +317,6 @@ app.post('/buy/:id/:id1', async (req, res)=>{
 
     var ci = await Cartitem.findByIdAndDelete(req.params.id1)
     .then(async (data)=>{
-        // console.log(data)
         
        const newtran1 = new Transaction({
             qty: data.qty,
@@ -422,8 +336,6 @@ app.post('/buy/:id/:id1', async (req, res)=>{
         console.log(error)
        })
 
-
-    //    const cartproduct = Cart.findOneAndDelete({ _id: req.params.id }) {'$set' :{Checked: true}}
     const oldid = data.oldid
     const quantity = data.qty
     const mainproduct = await Ecart.findByIdAndUpdate({ _id: oldid }, {
@@ -435,13 +347,10 @@ app.post('/buy/:id/:id1', async (req, res)=>{
     Ecart.findOne({ _id: oldid}, async(err, dt)=>{
     
     var id = data.oldid
-    // const quan = data.qty
 
     await Cartitem.find()
     .then(async(p)=>{
         for(var i=0; i < p.length; i++) {
-            // console.log(typeof(id))
-            // console.log(typeof(p[i].oldid))
             if( id.toString() == p[i].oldid.toString() ){
             
                 Cartitem.findByIdAndUpdate(p[i]._id, {$set:{oldqty:dt.productQty}}, {new: true})
@@ -472,44 +381,8 @@ app.post('/buy/:id/:id1', async (req, res)=>{
 });
 
 
-/*
-app.post("/buy/:id", async (req,res)=>{
-    try{
-        var cartproduct = await Cartitem.findById({_id: req.params.id});
-        var qty = cartproduct.qty;
-        var name = cartproduct.name;
-        var price = cartproduct.price;
-        var tprice = cartproduct.tprice;
-
-        var date = new Date();
-        var data = {
-            name: cartproduct.name,
-            price: cartproduct.price,
-            qty: cartproduct.qty,
-            tprice: cartproduct.tprice,
-            username: req.session.username,
-            email: req.session.email,
-            date: date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear(),
-            time: date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()
-        }
-        
-        var transaction = new Transaction(data)
-        const savedtran = await transaction.save()
-        console.log(savedtran)
-        res.send("product purchased successfully")
-        Cartitem.findByIdAndDelete({_id: req.params.id});
-        res.redirect('/eCart');
-    }
-    catch(err){
-        console.log(err)
-        // res.send("Something went wrong")
-    }
-})
-*/
-
 // view transaction page
 app.get('/eTransaction', function(req, res){
-    // var transactions = Transaction.find()
     Transaction.find({}, (err, data)=>{
         if(err) throw err;
         res.render('transaction', {data});
